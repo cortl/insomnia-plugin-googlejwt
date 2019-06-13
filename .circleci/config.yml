@@ -1,0 +1,52 @@
+version: 2.1
+
+commands:
+  setup-git:
+    steps:
+      - run:
+          name: Setup Git
+          command: |
+            git config user.email "cortlan.bainbridge@gmail.com"
+            git config user.name "Circle CI"
+      - add_ssh_keys
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/repo
+
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        - v1-dependencies-
+    - run: npm install
+    - save_cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+  deploy:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/repo
+    steps:
+    - checkout
+    - setup-git
+    - run: npm version patch -m "v%s [skip ci]"
+    - run: git push --follow-tags origin HEAD
+    - run: npm install
+    - run: npm publish
+
+workflows:
+  version: 2
+  -deploy:
+    jobs:
+    - build
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
