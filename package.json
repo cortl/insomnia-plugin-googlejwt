@@ -1,7 +1,7 @@
 {
   "name": "insomnia-plugin-googlejwt",
   "description": "Generate Google JWT for applications hiding behind IAP",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "plugin.js",
   "author": {
     "name": "Cortlan Bainbridge",
