@@ -1,0 +1,28 @@
+{
+  "name": "insomnia-plugin-googlejwt",
+  "description": "Generate Google JWT for applications hiding behind IAP",
+  "version": "1.0.0",
+  "main": "plugin.js",
+  "author": {
+    "name": "Cortlan Bainbridge",
+    "email": "hello@cortlan.dev",
+    "url": "https://cortlan.dev"
+  },
+  "files": [
+    "plugin.js",
+    "package.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cortl/insomnia-plugin-googlejwt"
+  },
+  "license": "LGPL-3.0-or-later",
+  "insomnia": {
+    "name": "GoogleJwtCreator",
+    "description": "Creates JWT for accessing IAP protected app engine services"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
