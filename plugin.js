@@ -7,7 +7,7 @@ module.exports.templateTags = [{
   displayName: 'Google JWT Creator',
   description: 'Generate Google JWT with RS256 signature',
   args: [{
-    displayName: 'Target Audience',
+    displayName: 'IAP Client ID',
     description: 'This is retrieved from the three dot menu of your IAP in Google Cloud',
     type: 'string',
     defaultValue: ''
