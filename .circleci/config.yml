@@ -36,7 +36,7 @@ jobs:
     - setup-git
     - run: npm version patch -m "v%s [skip ci]"
     - run: git push --follow-tags origin HEAD
-    - run: npm install
+    - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
     - run: npm publish
 
 workflows:
