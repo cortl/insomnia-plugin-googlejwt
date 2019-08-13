@@ -3,6 +3,9 @@
   "description": "Generate Google JWT for applications hiding behind IAP",
   "version": "1.0.4",
   "main": "plugin.js",
+  "scripts": {
+    "dev:mac": "nodemon --exec \"rsync -av --exclude='.*' . ~/Library/Application\\ Support/Insomnia/plugins/insomnia-plugin-googlejwt\""
+  },
   "author": {
     "name": "Cortlan Bainbridge",
     "email": "hello@cortlan.dev",
@@ -24,5 +27,8 @@
   "dependencies": {
     "axios": "^0.19.0",
     "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
