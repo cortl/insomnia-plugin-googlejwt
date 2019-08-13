@@ -23,13 +23,11 @@ module.exports.templateTags = [{
   }],
   async run(_context, target_audience, location) {
     const serviceCredentials = JSON.parse(fs.readFileSync(location));
-
     const payload = {
       iat: Math.floor(new Date().getTime() / 1000) - 10,
       exp: Math.floor(new Date().getTime() / 1000) + 120,
       target_audience
     }
-
     const options = {
       algorithm: "RS256",
       keyid: serviceCredentials.private_key_id,
@@ -37,15 +35,11 @@ module.exports.templateTags = [{
       issuer: serviceCredentials.client_email,
       subject: serviceCredentials.client_email,
     }
-
     const token = jwt.sign(payload, serviceCredentials.private_key, options);
-
     const formData = new FormData();
     formData.append('assertion', token);
     formData.append('grant_type', 'urn:ietf:params:oauth:grant-type:jwt-bearer');
 
-    const res = await axios.post(tokenUrl, formData, axiosConfig);
-
-    return res.data.id_token;
+    return await axios.post(tokenUrl, formData, axiosConfig).then(res => res.data.id_token);
   }
 }];
