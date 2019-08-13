@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const axios = require('axios');
 
+const tokenUrl = 'https://www.googleapis.com/oauth2/v4/token';
+const axiosConfig = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
+
 module.exports.templateTags = [{
   name: 'jwtCreate',
   displayName: 'Google JWT Creator',
@@ -30,16 +33,18 @@ module.exports.templateTags = [{
     const options = {
       algorithm: "RS256",
       keyid: serviceCredentials.private_key_id,
-      audience: 'https://www.googleapis.com/oauth2/v4/token',
+      audience: tokenUrl,
       issuer: serviceCredentials.client_email,
       subject: serviceCredentials.client_email,
     }
 
     const token = jwt.sign(payload, serviceCredentials.private_key, options);
 
-    const res = await axios.post('https://www.googleapis.com/oauth2/v4/token',
-      `assertion=${token}&grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer`,
-      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+    const formData = new FormData();
+    formData.append('assertion', token);
+    formData.append('grant_type', 'urn:ietf:params:oauth:grant-type:jwt-bearer');
+
+    const res = await axios.post(tokenUrl, formData, axiosConfig);
 
     return res.data.id_token;
   }
