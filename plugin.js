@@ -4,6 +4,7 @@ const axios = require('axios');
 
 const tokenUrl = 'https://www.googleapis.com/oauth2/v4/token';
 const axiosConfig = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
+const grantType = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
 
 module.exports.templateTags = [{
   name: 'jwtCreate',
@@ -36,10 +37,8 @@ module.exports.templateTags = [{
       subject: serviceCredentials.client_email,
     }
     const token = jwt.sign(payload, serviceCredentials.private_key, options);
-    const formData = new FormData();
-    formData.append('assertion', token);
-    formData.append('grant_type', 'urn:ietf:params:oauth:grant-type:jwt-bearer');
 
-    return await axios.post(tokenUrl, formData, axiosConfig).then(res => res.data.id_token);
+    return await axios.post(tokenUrl, `assertion=${token}&grant_type=${grantType}`, axiosConfig)
+      .then(res => res.data.id_token);
   }
 }];
