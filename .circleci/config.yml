@@ -6,7 +6,7 @@ commands:
       - run:
           name: Setup Git
           command: |
-            git config user.email "cortlan.bainbridge@gmail.com"
+            git config user.email "sayhi@circleci.com"
             git config user.name "Circle CI"
       - add_ssh_keys
 
