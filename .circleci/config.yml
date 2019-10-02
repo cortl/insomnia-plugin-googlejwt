@@ -7,7 +7,7 @@ commands:
           name: Setup Git
           command: |
             git config user.email "sayhi@circleci.com"
-            git config user.name "Circle CI"
+            git config user.name "Your Mom"
       - add_ssh_keys
 
 jobs:
