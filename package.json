@@ -1,7 +1,7 @@
 {
   "name": "insomnia-plugin-googlejwt",
   "description": "Generate Google JWT for applications hiding behind IAP",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "main": "plugin.js",
   "scripts": {
     "dev:mac": "nodemon --exec \"rsync -av --exclude='.*' . ~/Library/Application\\ Support/Insomnia/plugins/insomnia-plugin-googlejwt\""
