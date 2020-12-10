@@ -22,7 +22,11 @@
   "license": "LGPL-3.0-or-later",
   "insomnia": {
     "name": "GoogleJwtCreator",
-    "description": "Creates JWT for accessing IAP protected app engine services"
+    "displayName": "Google JWT Creator",
+    "description": "Creates JWT for accessing IAP protected app engine services using service account credentials"
+  },
+  "applications": {
+    "core": "*"
   },
   "dependencies": {
     "axios": "^0.19.0",
